@@ -2,7 +2,7 @@
 Cython Changelog
 ================
 
-3.0.0 (2019-??-??)
+3.0.0 (2020-??-??)
 ==================
 
 Features added
@@ -166,11 +166,24 @@ Other changes
 * Support for Python 2.6 was removed.
 
 
-0.29.14 (2019-??-??)
+0.29.15 (20??-??-??)
+====================
+
+* Double reference free in ``__class__`` cell handling for ``super()`` calls.
+  (Github issue #3246)
+
+* Deprecated import failed in Python 3.9.
+  (Github issue #3266)
+
+
+0.29.14 (2019-11-01)
 ====================
 
 Bugs fixed
 ----------
+
+* The generated code failed to initialise the ``tp_print`` slot in CPython 3.8.
+  Patches by Pablo Galindo and Orivej Desh (Github issues #3171, #3201).
 
 * ``?`` for ``bool`` was missing from the supported NumPy dtypes.
   Patch by Max Klein.  (Github issue #2675)
@@ -184,6 +197,16 @@ Bugs fixed
 
 * An incorrect compiler warning was fixed in automatic C++ string conversions.
   Patch by Gerion Entrup.  (Github issue #3108)
+
+* Error reports in the Jupyter notebook showed unhelpful stack traces.
+  Patch by Matthew Edwards (Github issue #3196).
+
+* ``Python.h`` is now also included explicitly from ``public`` header files.
+  (Github issue #3133).
+
+* Distutils builds with ``--parallel`` did not work when using Cython's
+  deprecated ``build_ext`` command.
+  Patch by Alphadelta14 (Github issue #3187).
 
 Other changes
 -------------
@@ -1248,7 +1271,7 @@ Features added
 * "cdef extern" include files are now also searched relative to the current file.
   Patch by Jeroen Demeyer (Github issue #1654).
 
-* Optional optimization for re-aquiring the GIL, controlled by the
+* Optional optimization for re-acquiring the GIL, controlled by the
   `fast_gil` directive.
 
 Bugs fixed
